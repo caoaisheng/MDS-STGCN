@@ -1,0 +1,40 @@
+# Configuration with same parameters as in AGCN paper/code (except batch size)
+
+input_data:
+  - path: E:/Fogvideo/preprocessed_data/sk/128-aug/skeleton_default/cross_subject
+    loader: NumpyDatasetLoader
+    loader_args:
+      in_memory: True
+out_path: E:/Fogvideo/unconnect/ex-128-64
+model: agcn
+dataset: data
+#session_type: training
+session_type: evaluation
+eval_session_id: training_2025_03_11-22_47_47_agcn_cs
+fixed_seed: 1
+
+base_lr: 0.01
+
+#optimizer: ADAM
+#optimizer_args:
+#  weight_decay: 0.01
+#
+#lr_scheduler: cawr
+#lr_scheduler_args:
+#  T_0: 20
+
+optimizer: SGD
+optimizer_args:
+  momentum: 0.9
+  nesterov: true
+  weight_decay: 0.0001
+
+lr_scheduler: multistep
+lr_scheduler_args:
+  milestones:
+    - 20
+    - 28
+  gamma: 0.1
+
+batch_size: 64
+epochs: 30
